@@ -1398,6 +1398,30 @@ $show_form = ( 'add' === $action || $is_edit );
 
 						<div class="sms-form-grid">
 
+							<div class="sms-filter-field">
+
+								<label><?php esc_html_e( 'Student', 'school-management-system' ); ?></label>
+
+								<select name="student_id">
+
+									<option value=""><?php esc_html_e( 'All Students', 'school-management-system' ); ?></option>
+
+									<?php
+									$students = Student::get_all( array(), 1000 );
+									foreach ( $students as $student ) {
+										echo '<option value="' . intval( $student->id ) . '" ' . selected( $student_id_filter, $student->id, false ) . '>' . esc_html( $student->first_name . ' ' . $student->last_name . ' (' . $student->roll_number . ')' ) . '</option>';
+									}
+									?>
+
+								</select>
+
+							</div>
+
+							<div class="sms-filter-field">
+								<label><?php esc_html_e( 'Student Name', 'school-management-system' ); ?></label>
+								<input type="text" name="student_name" value="<?php echo esc_attr( $student_name_filter ); ?>" placeholder="<?php esc_attr_e( 'Search by name...', 'school-management-system' ); ?>">
+							</div>
+
 							<div class="sms-form-field">
 
 								<label class="sms-form-label" for="exam_id">

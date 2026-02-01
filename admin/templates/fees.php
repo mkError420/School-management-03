@@ -1304,12 +1304,14 @@ if ( isset( $_GET['sms_message'] ) ) {
 			$report_status     = sanitize_text_field( $_GET['status'] ?? '' );
 			$report_start_date = sanitize_text_field( $_GET['start_date'] ?? '' );
 			$report_end_date   = sanitize_text_field( $_GET['end_date'] ?? '' );
+			$report_student_name = sanitize_text_field( $_GET['student_name'] ?? '' );
 
 			$report_filters = array(
 				'class_id'   => $report_class_id,
 				'status'     => $report_status,
 				'start_date' => $report_start_date,
 				'end_date'   => $report_end_date,
+				'student_name' => $report_student_name,
 				'exclude_fee_type' => 'Admission Fee',
 			);
 			$fees_report = Fee::get_fees_report( $report_filters );
@@ -1369,6 +1371,14 @@ if ( isset( $_GET['sms_message'] ) ) {
 										<span class="sms-date-separator"><?php esc_html_e( 'to', 'school-management-system' ); ?></span>
 										<input type="date" name="end_date" id="end_date" value="<?php echo esc_attr( $report_end_date ); ?>" placeholder="<?php esc_html_e( 'To', 'school-management-system' ); ?>" />
 									</div>
+								</div>
+								
+								<div class="sms-filter-group">
+									<label class="sms-filter-label">
+										<span class="dashicons dashicons-admin-users"></span>
+										<?php esc_html_e( 'Student Name', 'school-management-system' ); ?>
+									</label>
+									<input type="text" name="student_name" class="sms-filter-select" value="<?php echo esc_attr( $report_student_name ); ?>" placeholder="<?php esc_attr_e( 'Search by name...', 'school-management-system' ); ?>" />
 								</div>
 								
 								<div class="sms-filter-group">

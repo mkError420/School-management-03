@@ -312,6 +312,11 @@ class Result {
 			$sql .= $wpdb->prepare( " AND r.student_id = %d", $filters['student_id'] );
 		}
 
+		if ( ! empty( $filters['student_name'] ) ) {
+			$name_search = '%' . $wpdb->esc_like( $filters['student_name'] ) . '%';
+			$sql .= $wpdb->prepare( " AND (s.first_name LIKE %s OR s.last_name LIKE %s)", $name_search, $name_search );
+		}
+
 		$sql .= " ORDER BY r.id DESC";
 
 		return $wpdb->get_results( $sql );
